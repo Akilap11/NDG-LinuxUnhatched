@@ -1,0 +1,100 @@
+Every part of the command is normally case-sensitive, 
+so LS is incorrect and will fail, but ls is correct and will execute.
+pwd = print working directory
+cd = change directory
+cd /home/sysadmin = change to /home/sysadmin directory
+cd .. = change to parent directory
+cd ~ = change to home directory
+cd / = change to root directory
+
+ls = list files
+ls -l = list files in long format
+ls -r = list files in reverse order
+ls Documents = list files in Documents
+ls -l -r
+ls -rl
+ls -lr
+
+aptitude moo  = easter eggs
+aptitude -v moo = verbose
+aptitude -vv moo = very verbose
+
+-rw-r--r--       
+drwxr-x--- 
+*First element of these are:
+d	directory	A file used to store other files.
+-	regular file	Includes readable files, images files, binary files, and compressed files.
+l	symbolic link	Points to another file.
+s	socket	Allows for communication between processes.
+p	pipe	Allows for communication between processes.
+b	block file	Used to communicate with hardware.
+c	character file	Used to communicate with hardware.
+
+-rw-rw-r--
+first rwx = user
+second rwx = group
+third rwx = other
+
+Permissions
+drwxr-xr-x 2 root   root   4096 Apr 11  2014 upstart
+Permissions indicate how certain users can access a file. 
+
+Hard Link Count
+-rw-r----- 1 syslog adm    1346 Oct  2 22:17 auth.log
+This number indicates how many hard links point to this file. 
+
+User Owner
+-rw-r----- 1 syslog adm     106 Oct  2 19:57 kern.log
+User syslog owns this file. Every time a file is created, 
+the ownership is automatically assigned to the user who created it.
+
+Group Owner
+-rw-rw-r-- 1 root   utmp 292584 Oct  2 19:57 lastlog
+utmp Indicates which group owns this file
+
+File Size
+-rw-r----- 1 syslog adm   19573 Oct  2 22:57 syslog
+19573 indicates the size of the file in bytes.
+
+Timestamp
+drwxr-xr-x 2 root   root   4096 Dec  7  2017 fsck
+This indicates the time that the file's contents were last modified.
+
+Filename
+-rw-r--r-- 1 root   root  47816 Dec  7  2017 bootstrap.log
+The final field contains the name of the file or directory.
+
+The -t option will sort the files by timestamp:
+ls -lt
+
+The -S option will sort the files by file size:
+ls -l -S
+
+The -r option will reverse the order of any type of sort. 
+ls -lSr 
+
+The numbers in file size field switch from descending to ascending.
+ls -r
+
+su -  = switch user
+exit  = exit user
+su -l  = switch user
+su --login   = switch user
+
+sudo sl= switch user with root access
+
+
+sysadmin@localhost:~/Documents/School$ cd ~/Documents  
+
+chmod u+x hello.sh = give user execute permission
+chmod g+x hello.sh = give group execute permission
+chmod o+x hello.sh = give other execute permission
+chmod a+x hello.sh = give all execute permission
+
+./hello.sh  
+
+sudo chown root hello.sh  = change ownership to root
+sudo chgrp root hello.sh  = change group ownership to root
+sudo chown root:root hello.sh  = change ownership and group ownership to root
+
+
