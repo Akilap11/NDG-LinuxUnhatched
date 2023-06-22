@@ -355,5 +355,10 @@ ps -e // display all processes
 ps -ef  // display all processes and full information
 
 
+*18
+sudo apt-get update  # update the list of available packages
+apt-cache search cow    # search for a package
+sudo apt-get install cowsay    # install a package
+cowsay 'NDG Linux Unhatched'   # run a command
 
 
