@@ -97,4 +97,263 @@ sudo chown root hello.sh  = change ownership to root
 sudo chgrp root hello.sh  = change group ownership to root
 sudo chown root:root hello.sh  = change ownership and group ownership to root
 
+cat animals.txt                            
+1 retriever                                                             
+2 badger                                                                
+3 bat                                                                  
+4 wolf                                                                  
+5 eagle
+The cat command displays all five lines of the file
+
+head alpha.txt //displays first 10 lines of file
+tail alpha.txt //displays last 10 lines of file
+head -n 5 alpha.txt
+tail -n 5 alpha.txt
+
+cp /etc/passwd .  //copy file to current directory
+
+if	
+Input File: The input file to be read from.
+
+dd if=/dev/zero of=/tmp/swapex bs=1M count=50 
+The example reads from the /dev/zerofile, a special file containing an unlimited number of zeros.
+
+of	
+Output File: The output file to be written.
+
+dd if=/dev/zero of=/tmp/swapex bs=1M count=50
+bs	
+Block Size: The block size to be used. By default, the value is considered to be in bytes. Use the following suffixes to specify other units: K, M, G, and T for kilobytes, megabytes, gigabytes and terabytes respectively.
+
+dd if=/dev/zero of=/tmp/swapex bs=1M count=50
+The example uses a block size of one megabyte.
+
+count	
+Count: The number of blocks to be read from the input file.
+
+dd if=/dev/zero of=/tmp/swapex bs=1M count=50
+The example command reads 50 blocks.
+
+
+mv people.csv Work //move file to Work directory
+
+rm linux.txt //remove file
+rm -r Work //remove directory
+
+grep sysadmin passwd //search for sysadmin in passwd file
+grep 'root' passwd   //search for root in passwd file
+
+
+Basic Regex Character(s)	Meaning
+.	Any one single character
+[ ]	Any one specified character
+[^ ]	Not the one specified character
+*	Zero or more of the previous character
+^	If first character in the pattern, then pattern must be at beginning of the line to match, otherwise just a literal ^
+$	If last character in the pattern, then pattern must be at the end of the line to match, otherwise just a literal $
+
+Extended Regex Character(s)	Meaning
++	One or more of the previous pattern
+?	The preceding pattern is optional
+{ }	Specify minimum, maximum or exact matches of the previous pattern
+|	Alternation - a logical "or"
+( )	Used to create groups
+
+The first anchor character ^ is used to ensure that a pattern appears at the beginning of the line. For example, to find all lines in /etc/passwd that start with root use the pattern ^root. Note that ^ must be the first character in the pattern to be effective.
+
+sysadmin@localhost:~/Documents$ grep '^root' /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+For the next example, first examine the alpha-first.txt file. The cat command can be used to print the contents of a file:
+
+sysadmin@localhost:~/Documents$ cat alpha-first.txt                             
+A is for Animal                                                                 
+B is for Bear                                                                   
+C is for Cat                                                                    
+D is for Dog                                                                    
+E is for Elephant                                                               
+F is for Flower
+The second anchor character $ can be used to ensure a pattern appears at the end of the line, thereby effectively reducing the search results. To find the lines that end with an r in the alpha-first.txt file, use the pattern r$:
+
+sysadmin@localhost:~/Documents$ grep 'r$' alpha-first.txt
+B is for Bear
+F is for Flower
+Again, the position of this character is important, the $ must be the last character in the pattern in order to be effective as an anchor.
+
+
+Match a Single Character With .
+The following examples will use the red.txt file:
+
+sysadmin@localhost:~/Documents$ cat red.txt
+red
+reef
+rot
+reeed
+rd
+rod
+roof
+reed
+root
+reel
+read
+One of the most useful expressions is the period . character. It will match any character except for the new line character. The pattern r..f would find any line that contained the letter r followed by exactly two characters (which can be any character except a newline) and then the letter f:
+
+sysadmin@localhost:~/Documents$ grep 'r..f' red.txt
+reef
+roof
+The same concept can be repeated using other combinations. The following will find four letter words that start with r and with d:
+
+sysadmin@localhost:~/Documents$ grep 'r..d' red.txt
+reed
+read
+This character can be used any number of times. To find all words that have at least four characters the following pattern can be used:
+
+sysadmin@localhost:~/Documents$ grep '....' red.txt                             
+reef
+reeed
+roof                                                                            
+reed
+root
+reel
+read
+The line does not have to be an exact match, it simply must contain the pattern, as seen here when r..t is searched for in the /etc/passwd file:
+
+sysadmin@localhost:~/Documents$ grep 'r..t' /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+operator:x:1000:37::/root:  
+
+
+Match a Single Character With .
+The following examples will use the red.txt file:
+
+sysadmin@localhost:~/Documents$ cat red.txt
+red
+reef
+rot
+reeed
+rd
+rod
+roof
+reed
+root
+reel
+read
+One of the most useful expressions is the period . character. It will match any character except for the new line character. The pattern r..f would find any line that contained the letter r followed by exactly two characters (which can be any character except a newline) and then the letter f:
+
+sysadmin@localhost:~/Documents$ grep 'r..f' red.txt
+reef
+roof
+The same concept can be repeated using other combinations. The following will find four letter words that start with r and with d:
+
+sysadmin@localhost:~/Documents$ grep 'r..d' red.txt
+reed
+read
+This character can be used any number of times. To find all words that have at least four characters the following pattern can be used:
+
+sysadmin@localhost:~/Documents$ grep '....' red.txt                             
+reef
+reeed
+roof                                                                            
+reed
+root
+reel
+read
+The line does not have to be an exact match, it simply must contain the pattern, as seen here when r..t is searched for in the /etc/passwd file:
+
+sysadmin@localhost:~/Documents$ grep 'r..t' /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+operator:x:1000:37::/root:  
+
+
+The regular expression character * is used to match zero or more occurrences of a character or pattern preceding it. For example e* would match zero or more occurrences of the letter e:
+
+sysadmin@localhost:~/Documents$ cat red.txt
+red
+reef
+rot
+reeed
+rd
+rod
+roof
+reed
+root
+reel
+read
+sysadmin@localhost:~/Documents$ grep 're*d' red.txt
+red
+reeed
+rd
+reed
+It is also possible to match zero or more occurrences of a list of characters by utilizing the square brackets. The pattern [oe]* used in the following example will match zero or more occurrences of the o character or the e character:
+
+sysadmin@localhost:~/Documents$ grep 'r[oe]*d' red.txt
+red
+reeed
+rd
+rod
+reed
+When used with only one other character, * isn't very helpful. Any of the following patterns would match every string or line in the file: .* e* b* z*.
+
+sysadmin@localhost:~/Documents$ grep 'z*' red.txt
+red
+reef
+rot
+reeed
+rd
+rod
+roof
+reed
+root
+reel
+read
+sysadmin@localhost:~/Documents$ grep 'e*' red.txt
+red
+reef
+rot
+reeed
+rd
+rod
+roof
+reed
+root
+reel
+read
+This is because * can match zero occurrences of a pattern. In order to make the * useful, it is necessary to create a pattern which includes more than just the one character preceding *. For example, the results above can be refined by adding another e to make the pattern ee* effectively matching every line which contains at least one e.
+
+sysadmin@localhost:~/Documents$ grep 'ee*' red.txt
+red
+reef
+reeed
+reed
+reel
+read
+
+
+
+If a file name is not given, the grep command will read from standard input, which normally comes from the keyboard with input provided by the user who runs the command. This provides an interactive experience with grep where the user types in the input and grep filters as it goes. Feel free to try it out, just press Ctrl-D when you're ready to return to the prompt.
+
+
+su -  # switch to root
+shutdown now  # shutdown the system
+date       # display the current date and time
+shutdown 01:51  # shutdown the system at 1:51 AM
+shutdown +1 "Goodbye World!"  # shutdown the system in 1 minute with a message
+shutdown -c  # cancel a shutdown
+shutdown -r now  # shutdown and reboot the system
+shutdown -r 01:51  # shutdown and reboot the system at 1:51 AM
+shutdown -r +1 "Goodbye World!"  # shutdown and reboot the system in 1 minute with a message
+shutdown -r +1  # shutdown and reboot the system in 1 minute
+
+
+ifconfig  # display network information
+ping -c 4 192.168.1.2  # ping the specified IP address 4 times
+ping -c 4 192.168.1.3  # ping the specified IP address 4 times
+
+
+*17
+ps # display a snapshot of the currently running processes
+ps -e // display all processes
+ps -ef  // display all processes and full information
+
+
+
 
